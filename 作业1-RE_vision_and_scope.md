@@ -1,86 +1,85 @@
-# Cafeteria Ordering System — Vision and Scope
+# Blog Platform — Vision and Scope
 
-**Version:** 1.0 (approved)  
-**Prepared by:** Karl Wiegers, Process Impact  
-**Date:** November 4, 2018
+**Version:** 1.0 (updated)
+**Prepared by:** Project Team
+**Date:** 2024-04-15
 
 ## Revision History
 | Version | Date | Author | Description |
 | --- | --- | --- | --- |
-| 1.0 draft 1 | 2018-10-13 | Karl Wiegers | Initial draft |
-| 1.0 approved | 2018-11-04 | Karl Wiegers | Baseline after inspection |
+| 0.1 draft | 2024-04-13 | Project Team | First draft derived from repository docs |
+| 1.0 | 2024-04-15 | Project Team | Updated to reflect blog platform scope |
 
 ## 1. Business Requirements
 ### 1.1 Background, Business Opportunity, and Customer Needs
-Process Impact employees currently spend about 60 minutes each workday to buy and eat lunch in the cafeteria, including ~20 minutes walking, selecting meals, and paying by cash or card. Off-site lunches average 90 minutes. Phone-ahead orders are possible but do not guarantee preferred menu items, and the cafeteria discards significant unsold food. A web-based ordering and delivery system would save employees time, increase the likelihood of getting desired meals, reduce food waste, and improve cafeteria efficiency. Future integration with local restaurants could broaden menu choices and enable bulk-purchase savings while shifting some meals away from the onsite cafeteria.
+The organization wants a public-facing blogging platform that showcases articles, media, and interactive content under a unified brand. The existing ad-hoc posts on disparate platforms fragment traffic, complicate maintenance, and provide no unified analytics. A dedicated web application would consolidate authoring, curation, and community engagement while reducing operational overhead through a single deployment across web and mobile browsers.
 
 ### 1.2 Business Objectives and Success Criteria
-- **BO-1:** Reduce cafeteria food wastage by 50% within 6 months of the initial release.  
-  - **Scale:** Value of food discarded weekly.  
-  - **Meter:** Cafeteria Inventory System logs.  
-  - **Baseline (2018 study):** 30% wastage.  
-  - **Plan:** <15%; **Must:** <20%.
-- **BO-2:** Reduce cafeteria operating costs by 15% within 12 months of the initial release.
-- **BO-3:** Increase effective work time by 20 minutes per employee per day within 3 months of the initial release.
-- **SC-1:** At least 75% of current cafeteria patrons use the Cafeteria Ordering System within 6 months of launch.
-- **SC-2:** Improve the average quarterly cafeteria satisfaction rating by 0.5 within 3 months and by 1.0 within 12 months of launch.
+- **BO-1:** Establish a recognizable blog destination that attracts returning visitors and improves content reach.
+- **BO-2:** Shorten content publishing time by providing built-in WYSIWYG/Markdown editing and media uploads.
+- **BO-3:** Increase community engagement through comments, likes, and personalized user profiles.
+- **SC-1:** Release 1 enables authenticated posting and public consumption across desktop and mobile responsive views.
+- **SC-2:** Achieve an average article page load under 2 seconds for the p95 percentile under normal traffic.
+- **SC-3:** Reach at least a 0.5 improvement in user satisfaction survey scores within six months of launch.
 
 ### 1.3 Business Risks
-- **RI-1:** The Cafeteria Employees Union could request contract renegotiations for new roles and hours. *(Probability: 0.6; Impact: 3)*
-- **RI-2:** Low employee adoption could reduce ROI for the system and operational changes. *(Probability: 0.3; Impact: 9)*
-- **RI-3:** Local restaurants might decline price reductions, lowering satisfaction and usage. *(Probability: 0.4; Impact: 3)*
+- **RI-1:** Low user adoption if onboarding and navigation are unintuitive.
+- **RI-2:** Security breaches or spam comments could erode trust and require remediation time.
+- **RI-3:** Operational costs may rise if media storage and CDN usage scale faster than projected traffic growth.
 
 ## 2. Vision of the Solution
 ### 2.1 Vision Statement
-For employees who want to order meals online from the company cafeteria or local restaurants, the Cafeteria Ordering System is an Internet-based application that supports individual or group orders, processes payments, and triggers delivery to designated locations on the Process Impact campus. Unlike current phone or in-person ordering, it saves travel time and expands available food choices.
+For readers, authors, and administrators who need a cohesive place to publish and consume content, the Blog Platform is a responsive web application that supports article creation, categorization, multimedia galleries, and social interactions. Unlike scattered third-party posts, it offers a consistent experience with streamlined author workflows, built-in moderation, and extensible APIs for future integrations.
 
 ### 2.2 Major Features
-- **FE-1:** Order meals from cafeteria menu for pickup or delivery.
-- **FE-2:** Order meals from local restaurants for delivery.
-- **FE-3:** Create, view, modify, and delete meal service subscriptions.
-- **FE-4:** Register for meal payment options.
-- **FE-5:** Request meal delivery.
-- **FE-6:** Create, view, modify, and delete cafeteria menus.
-- **FE-7:** Order custom meals not on the cafeteria menu.
-- **FE-8:** Produce recipes and ingredient lists for custom meals from the cafeteria.
-- **FE-9:** Provide access via corporate intranet or authorized external Internet access.
+- **FE-1:** Article browsing with pagination, search, category, and tag filters.
+- **FE-2:** Article detail pages with markdown rendering, related content suggestions, and SEO-friendly routing.
+- **FE-3:** Authentication and user profiles with registration, login, avatar, and nickname updates.
+- **FE-4:** Rich content publishing using a markdown editor, image and album management.
+- **FE-5:** Commenting and messaging for article discussions and notification of replies.
+- **FE-6:** Timeline view of posts by publication date.
+- **FE-7:** Specialized sections for photos, friend links, recommended websites, and music playback.
+- **FE-8:** Admin capabilities to manage content, categories, tags, links, and media assets.
+- **FE-9:** RESTful API layer for front-end and admin clients, secured via token-based authentication.
 
 ### 2.3 Assumptions and Dependencies
-- **AS-1:** Intranet-enabled computers and printers will support cafeteria staff processing without missing delivery windows.
-- **AS-2:** Cafeteria staff and vehicles are available to deliver all orders within 15 minutes of the requested time.
-- **DE-1:** If a restaurant has its own online ordering system, the Cafeteria Ordering System must support bidirectional communication.
+- **AS-1:** Front-end clients rely on the documented REST APIs exposed by the Node.js/Koa backend.
+- **AS-2:** A MySQL database and object storage (local, MinIO, or cloud) are available for persistent data and media.
+- **AS-3:** Users access the site through modern browsers with JavaScript enabled; responsive layout covers desktop and mobile.
+- **DE-1:** Third-party libraries (Vue 3, Element Plus, Pinia, Axios, Vite) remain stable for the supported runtime versions.
 
 ## 3. Scope and Limitations
 ### 3.1 Scope of Initial and Subsequent Releases
 | Feature | Release 1 | Release 2 | Release 3 |
 | --- | --- | --- | --- |
-| FE-1 | Standard lunch-menu meals; delivery payable only by payroll deduction | Add breakfast and dinner ordering; accept credit/debit cards | — |
-| FE-2 | Not implemented | Not implemented | Full implementation |
-| FE-3 | Implemented if time permits (medium priority) | Fully implemented | — |
-| FE-4 | Register for payroll deduction payments only | Register for credit and debit cards | — |
-| FE-5 | Delivery only to company campus sites | Add delivery to selected off-site locations | — |
-| FE-6 | Fully implemented | — | — |
-| FE-7 | Not implemented | Not implemented | Fully implemented |
-| FE-8 | Not implemented | Fully implemented | — |
-| FE-9 | Fully implemented | — | — |
+| FE-1 | Public browsing with pagination, category, and tag filters | Enhanced search relevance and caching | Multilingual URLs and advanced analytics |
+| FE-2 | Article details with markdown rendering and recommendations | Structured SEO metadata and sharing cards | A/B testing for content layouts |
+| FE-3 | Email/username registration, login, profile updates | Social login and profile privacy controls | Role-based profile customization |
+| FE-4 | Markdown editor with media upload and album management | Scheduled publishing and draft workflows | Collaborative editing |
+| FE-5 | Comments, message notifications | Threaded conversations and spam filtering | Moderation queues with bulk actions |
+| FE-6 | Timeline by publication date | Export/subscribe via RSS/Atom | Personalized timelines |
+| FE-7 | Photo albums, friend links, recommended sites, music player | Curated playlists and link health checks | User-submitted recommendations |
+| FE-8 | Admin CRUD for content taxonomy and media | Audit trails and version history | Workflow approvals |
+| FE-9 | JWT-secured REST API | Rate limiting and API keys | Public developer portal |
 
 ### 3.2 Limitations and Exclusions
-- **LI-1:** Some cafeteria items will not be suitable for delivery; the online menus are a subset of full cafeteria offerings.
-- **LI-2:** The system applies only to the cafeteria at the main Process Impact campus in Clackamas, Oregon.
+- **LI-1:** Live collaborative editing and offline-first capabilities are out of scope for the initial releases.
+- **LI-2:** The platform does not include built-in advertisement bidding or payment processing in current releases.
+- **LI-3:** Mobile native applications are excluded; the responsive web experience is prioritized.
 
 ## 4. Business Context
 ### 4.1 Stakeholder Profiles
 | Stakeholder | Major Value | Attitudes | Major Interests | Constraints |
 | --- | --- | --- | --- | --- |
-| Corporate Management | Improved productivity; cafeteria cost savings | Strong support through release 2; release 3 contingent on earlier results | Savings must exceed development and usage costs | None identified |
-| Cafeteria Staff | More efficient staffing; higher patron satisfaction | Concern about union relations and possible downsizing; otherwise receptive | Job preservation | Training for Internet use; need delivery staff and vehicles |
-| Patrons | Better selection; time savings; convenience | Enthusiastic but may still value social aspects of in-person dining | Ease of use; delivery reliability; menu availability | Need corporate intranet access |
-| Payroll Department | Minimal direct benefit; must enable payroll-deduction registration | Recognizes value but dislikes extra software work | Minimal changes to payroll applications | No resources yet committed for changes |
-| Restaurant Managers | Increased sales and exposure | Receptive but cautious | Minimal new technology; costs and effort of delivery | Might lack staff/capacity; may need Internet access |
+| Content Authors | Faster publishing, better presentation of articles and media | Supportive if editor is intuitive | Reliable uploads, preview accuracy, draft management | Need role-based permissions |
+| Readers | Discoverable content and smooth reading experience | Supportive if performance and navigation meet expectations | Fast load, search relevance, community features | Require privacy protection and uptime |
+| Administrators | Governance, moderation, and operational insights | Strongly supportive | Role management, analytics, abuse mitigation | Limited admin staffing |
+| Operations/IT | Stable deployments and maintainable stack | Supportive with clear DevOps practices | Monitoring, backups, security patches | Resource budgets and SLAs |
+| Partners/Friend Links | Referral traffic and branding | Supportive if link placement is reliable | Link visibility and uptime | Must comply with link policies |
 
 ### 4.2 Project Priorities
-- **Primary focus:** Achieve targeted waste reduction, adoption, and satisfaction improvements within the first two releases.
-- **Secondary focus:** Expand delivery coverage and restaurant integration once core cafeteria ordering stabilizes.
+- **Primary focus:** Deliver a performant, secure, and user-friendly reading and publishing experience across web and mobile browsers.
+- **Secondary focus:** Extend community features, analytics, and integration hooks after core publishing stabilizes.
 
 ### Operating Environment
-Planguage notation is used to state quantitative objectives precisely. All content © 2018 Karl E. Wiegers. All Rights Reserved.
+The system targets Node.js 18+, MySQL, and object storage for media. Front-end builds rely on Vite and Vue 3, with responsive layouts tested on modern desktop and mobile browsers.
